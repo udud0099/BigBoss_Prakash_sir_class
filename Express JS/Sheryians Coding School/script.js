@@ -3,6 +3,7 @@ import express from "express";
 const app = express();
 
 app.set("view engine", "ejs");
+app.use(express.static("./public"));
 
 app.use((req, res, next) => {
   console.log("middle ware");
@@ -14,7 +15,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/aa", (req, res) => {
-  res.render("index",{name:"ujjwal", age:99});
+  res.render("index", { name: "ujjwal", age: 99 });
 });
 app.get("/about/student/:studentName", (req, res) => {
   res.send(`hello you are ${req.params.studentName}`);
