@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@scaleway/random-name": "^5.1.2",
+    "figlet": "^1.8.2",
+    "give-me-a-joke": "^0.5.1"
+  }
+}
