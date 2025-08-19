@@ -1,0 +1,4 @@
+npm i express-generator -g
+
+express appname --view=ejs
+
