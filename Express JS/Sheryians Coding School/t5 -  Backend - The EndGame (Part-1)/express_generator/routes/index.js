@@ -32,4 +32,42 @@ router.get("/delete", async function (req, res, next) {
   res.send(deletedUser);
 });
 
+// sessions
+router.get("/savesessions", function (req, res) {
+  req.session.ban = true;
+  res.send("save sessions");
+});
+
+router.get("/readsessions", function (req, res) {
+  if (req.session.ban === true) {
+    res.send("you banned");
+  } else {
+    res.send("not ban");
+  }
+});
+
+router.get("/deletesessions", function (req, res) {
+  req.session.destroy(function (err) {
+    if (err) throw err;
+    res.send("ban remove");
+  });
+});
+
+// cookies
+router.get("/savecookies", function (req, res) {
+  res.cookie("age", 99);
+  res.send("save cokkies");
+});
+router.get("/readcookies", function (req, res) {
+  console.log(req.cookies.age);
+
+  res.send("read cokkies");
+});
+
+router.get("/deletecookies", function (req, res) {
+  res.clearCookie("age");
+
+  res.send("delete cokkies");
+});
+
 module.exports = router;
