@@ -2,3 +2,4 @@ npm i express-generator -g
 
 express appname --view=ejs
 
+npm i express-session
