@@ -1,0 +1,15 @@
+npm i express-generator -g
+
+express appname --view=ejs
+
+npm i express-session
+
+npm i mongoose
+
+npm i connect-flash
+
+npm i passport passport-local passport-localmongoose 
+
+ 
+
+
