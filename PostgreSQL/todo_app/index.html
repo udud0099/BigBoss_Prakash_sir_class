@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Todo App</title>
+  </head>
+  <body>
+    <h1>My Todos</h1>
+
+    <!-- form to add new todo -->
+    <input id="todoInput" type="text" placeholder="Enter new todo" />
+    <button onclick="addTodo()">Add</button>
+
+    <ul id="todoList"></ul>
+
+    <script>
+      const API_URL = "http://localhost:5000/todos";
+
+      // fetch all todos and display them
+      async function loadTodos() {
+        const res = await fetch(API_URL);
+        const todos = await res.json();
+
+        const list = document.getElementById("todoList");
+        list.innerHTML = ""; // clear old
+
+        todos.forEach((todo) => {
+          const li = document.createElement("li");
+          li.textContent = todo.title + " ";
+
+          // delete button
+          const delBtn = document.createElement("button");
+          delBtn.textContent = "Delete";
+          delBtn.onclick = () => deleteTodo(todo.id);
+
+          li.appendChild(delBtn);
+          list.appendChild(li);
+        });
+      }
+
+      // add new todo
+      async function addTodo() {
+        const input = document.getElementById("todoInput");
+        const title = input.value.trim();
+        if (!title) return;
+
+        await fetch(API_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ title }),
+        });
+
+        input.value = "";
+        loadTodos(); // refresh list
+      }
+
+      // delete todo
+      async function deleteTodo(id) {
+        await fetch(`${API_URL}/${id}`, { method: "DELETE" });
+        loadTodos(); // refresh list
+      }
+
+      // load on startup
+      loadTodos();
+    </script>
+  </body>
+</html>
