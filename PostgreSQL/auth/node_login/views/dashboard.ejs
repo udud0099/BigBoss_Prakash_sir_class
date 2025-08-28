@@ -7,6 +7,6 @@
   </head>
   <body>
     <a href="/users/logout">logout</a>
-    <h1>hi dashboard <%= user %></h1>
+    <h1>hi dashboard <%= user.charAt(0).toUpperCase() + user.slice(1) %></h1>
   </body>
 </html>
